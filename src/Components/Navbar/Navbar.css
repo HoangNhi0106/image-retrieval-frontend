@@ -1,0 +1,64 @@
+.navbar {
+    width: 100vw;
+    height: 60px;
+    background-color: #3f51b7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-left {
+    display: flex;
+    width: 25%;
+    margin-left: 20px;
+}
+
+.navbar-right {
+    display: flex;
+    width: 75%;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+.app-name {
+    color: white;
+    font-weight: bolder;
+    font-size: 25px;
+    margin: auto 30px;
+}
+
+.slider-item {
+    height: 30px;
+    padding-top: 8px;
+}
+
+.navbar-label {
+    color: white;
+    margin: auto 20px;
+}
+
+.slider {
+    width: 180px;
+    height: 8px;
+}
+
+.textbox {
+    background-color: #5f69c0;
+    outline: none;
+    height: 36px;
+    width: 180px;
+    padding: 0 5px;
+    border: 0.5px solid #5f69c0;
+    border-radius: 5px;
+    color: white;
+}
+
+.show-result-btn {
+    margin-left: 20px;
+    width: 130px;
+    height: 37px;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: #3f51b7;
+    color: white;
+}
