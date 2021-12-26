@@ -1,35 +1,36 @@
-import React from "react";
-import { styled } from '@mui/material/styles';
+import React, {useEffect, useState, useLayoutEffect} from "react";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
 import './ImageGallery.css'
 
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
-
 const ImageGallery = (props) => {
+    const cols = props.cols;
+    const rows = props.rows;
+    var size = Math.min((props.windowWidth - 600) / cols, (props.windowHeight - 180) / rows)
+    const [images, setImages] = useState([])
+
+    useEffect(() => {
+        console.log(size)
+        var limit = cols * rows;
+        var arr = []
+        for (let i = 0; i < limit; i++) {
+            arr.push("pika.png")
+        }
+        setImages(arr)
+    }, [props])
+
+    
+
     return (
         <div className="image-gallery">
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2} columns={props.cols} rows={props.rows}>
-                    <Grid item xs={1}>
-                        <Item>xs=8</Item>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Item>xs=4</Item>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Item>xs=4</Item>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Item>xs=8</Item>
-                    </Grid>
+                <Grid container spacing={0} columns={props.cols}>
+                    {images.map((image) => 
+                        <Grid item xs={1}>
+                            <img src={image} width={size} height={size}/>
+                        </Grid>
+                    )}
                 </Grid>
             </Box>
         </div>
