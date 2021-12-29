@@ -9,7 +9,55 @@ const FilterByText = (props) => {
         <form className={props.type === 1 ? "show" : "close"}>
             <div className="input-item">
                 <label className="sidebar-label" htmlFor="query-sentences">Query sentence</label>
-                <input type="text" value={query} className="query-input" id="query-sentences" onChange={(e) => setQuery(e.target.value)}/>
+                <input type="text" value={query} className="sidebar-input" id="query-sentences" onChange={(e) => setQuery(e.target.value)}/>
+            </div>
+
+            <div className="limit-input-field">
+                <div className="p-left">Get the top</div>
+                <input type="number" value={limit} className="limit-input" id="limit-input" onChange={(e) => setLimit(e.target.value)}/>
+                <div className="p-right">results</div>
+            </div>
+
+            <button className="filter-btn">FILTER</button>
+        </form>
+    )
+}
+
+const FilterByLocation = (props) => {
+    const [location, setLocation] = useState(null)
+    const [limit, setLimit] = useState(0)
+
+    return (
+        <form className={props.type === 2 ? "show" : "close"}>
+            <div className="input-item">
+                <label className="sidebar-label" htmlFor="location">Location</label>
+                <select className="location-select" id="location" onChange={(e) => setLocation(e.target.value)}>
+                    <option value={1}>Hello</option>
+                    <option value={2}>Nice</option>
+                    <option value={3}>Bye</option>
+                </select>
+            </div>
+
+            <div className="limit-input-field">
+                <div className="p-left">Get the top</div>
+                <input type="number" value={limit} className="limit-input" id="limit-input" onChange={(e) => setLimit(e.target.value)}/>
+                <div className="p-right">results</div>
+            </div>
+
+            <button className="filter-btn">FILTER</button>
+        </form>
+    )
+}
+
+const FilterByTime = (props) => {
+    const [time, setTime] = useState(null)
+    const [limit, setLimit] = useState(0)
+
+    return (
+        <form className={props.type === 3 ? "show" : "close"}>
+            <div className="input-item">
+                <label className="sidebar-label" htmlFor="time-input">Time</label>
+                <input type="date" value={time} className="sidebar-input" id="time-input" onChange={(e) => setTime(e.target.value)}/>
             </div>
 
             <div className="limit-input-field">
@@ -52,6 +100,8 @@ const Sidebar = () => {
 
                 <div className="filter-box-body">
                     <FilterByText type={type}/>
+                    <FilterByLocation type={type}/>
+                    <FilterByTime type={type}/>
                 </div>
 
                 <button className="continue-btn">CONTINUE FILTERING</button>

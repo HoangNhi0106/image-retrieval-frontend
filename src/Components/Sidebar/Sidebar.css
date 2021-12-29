@@ -53,9 +53,22 @@
     margin-bottom: 10px;
 }
 
-.query-input {
+.sidebar-input {
     display: inline-block;
     outline: none;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: 50px;
+    width: 300px;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #373838;
+}
+
+.location-select {
+    display: inline-block;
+    outline: none;
+    background-color: white;
     border: 1px solid lightgray;
     border-radius: 5px;
     height: 50px;
