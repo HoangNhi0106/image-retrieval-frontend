@@ -10,6 +10,15 @@ function Pagination(props) {
         pages = props.pages;
     }, [props])
 
+    useEffect(() => {
+        if (props.numPages == 1) {
+            props.changePages([1])
+        } else {
+            props.changePages([1, 2])
+        }
+        props.changePage(1)
+    }, [props.numPages])
+
     const handleNext = () => {
         if (page == pages[1])
             if (page + 1 <= props.numPages)

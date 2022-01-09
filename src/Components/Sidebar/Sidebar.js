@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import './Sidebar.css'
+import axios from 'axios';
 
 const FilterByText = (props) => {
     const [query, setQuery] = useState(null)
     const [limit, setLimit] = useState(0)
 
+    const handleFilterByText = () => {
+        var url = `https://8f2d-2402-800-6314-bd02-f49c-706d-7377-bc5b.ngrok.io/myapp/server/query_by_caption/${query}/cosine/${limit}`;
+        axios.get(url, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            props.saveImages(response.data.filenames)
+        })
+        .catch(err => console.log(err))
+    }
+
     return (
-        <form className={props.type === 1 ? "show" : "close"}>
+        <div className={props.type === 1 ? "show" : "close"}>
             <div className="input-item">
                 <label className="sidebar-label" htmlFor="query-sentences">Query sentence</label>
                 <input type="text" value={query} className="sidebar-input" id="query-sentences" onChange={(e) => setQuery(e.target.value)}/>
@@ -18,8 +32,8 @@ const FilterByText = (props) => {
                 <div className="p-right">results</div>
             </div>
 
-            <button className="filter-btn">FILTER</button>
-        </form>
+            <button className="filter-btn" onClick={handleFilterByText}>FILTER</button>
+        </div>
     )
 }
 
@@ -28,13 +42,13 @@ const FilterByLocation = (props) => {
     const [limit, setLimit] = useState(0)
 
     return (
-        <form className={props.type === 2 ? "show" : "close"}>
+        <div className={props.type === 2 ? "show" : "close"}>
             <div className="input-item">
                 <label className="sidebar-label" htmlFor="location">Location</label>
                 <select className="location-select" id="location" onChange={(e) => setLocation(e.target.value)}>
-                    <option value={1}>Hello</option>
-                    <option value={2}>Nice</option>
-                    <option value={3}>Bye</option>
+                    <option value={1}>School</option>
+                    <option value={2}>House</option>
+                    <option value={3}>Park</option>
                 </select>
             </div>
 
@@ -45,7 +59,7 @@ const FilterByLocation = (props) => {
             </div>
 
             <button className="filter-btn">FILTER</button>
-        </form>
+        </div>
     )
 }
 
@@ -54,7 +68,7 @@ const FilterByTime = (props) => {
     const [limit, setLimit] = useState(0)
 
     return (
-        <form className={props.type === 3 ? "show" : "close"}>
+        <div className={props.type === 3 ? "show" : "close"}>
             <div className="input-item">
                 <label className="sidebar-label" htmlFor="time-input">Time</label>
                 <input type="date" value={time} className="sidebar-input" id="time-input" onChange={(e) => setTime(e.target.value)}/>
@@ -67,11 +81,11 @@ const FilterByTime = (props) => {
             </div>
 
             <button className="filter-btn">FILTER</button>
-        </form>
+        </div>
     )
 }
 
-const Sidebar = () => {
+const Sidebar = (props) => {
     const [type, setType] = useState(1);
 
     const handleChangeType = (t) => {
@@ -99,7 +113,7 @@ const Sidebar = () => {
                 </div>
 
                 <div className="filter-box-body">
-                    <FilterByText type={type}/>
+                    <FilterByText type={type} saveImages={props.saveImages}/>
                     <FilterByLocation type={type}/>
                     <FilterByTime type={type}/>
                 </div>

@@ -13,6 +13,7 @@ const App = () => {
   const [numPages, setNumPages] = useState(10)
   const [windowWidth, setWindowWidth] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
+  const [images, setImages] = useState([])
 
   let resizeWindow = () => {
       setWindowWidth(window.innerWidth);
@@ -33,6 +34,10 @@ const App = () => {
         setPages([1])
 }, [])
 
+  const saveNumPages = (num) => {
+    setNumPages(num)
+  }
+
   const changePages = (arr) => {
     setPages(arr)
   }
@@ -49,16 +54,20 @@ const App = () => {
     setRows(val)
   }
 
+  const saveImages = (images) => {
+    setImages(images);
+  }
+
   return (
       <div className='App'>
         <Navbar saveCols={saveCols} saveRows={saveRows}/>
         <div className='App-body'>
           <div className='App-body-left'>
-            <Sidebar/>
+            <Sidebar saveImages={saveImages}/>
           </div>
           <div className='App-body-right'>
-            <ImageGallery cols={cols} rows={rows} windowWidth={windowWidth} windowHeight={windowHeight}/>
-            <Pagination numPages={10} changePages={changePages} changePage={changePage} page={page} pages={pages}/>
+            <ImageGallery cols={cols} rows={rows} windowWidth={windowWidth} windowHeight={windowHeight} images={images} saveNumPages={saveNumPages} page={page}/>
+            <Pagination numPages={numPages} changePages={changePages} changePage={changePage} page={page} pages={pages}/>
           </div>
         </div>
       </div>

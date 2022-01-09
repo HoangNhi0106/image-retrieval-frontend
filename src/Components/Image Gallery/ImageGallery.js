@@ -11,13 +11,17 @@ const ImageGallery = (props) => {
     const [images, setImages] = useState([])
 
     useEffect(() => {
-        console.log(size)
         var limit = cols * rows;
+        var j = (props.page - 1) * limit;
         var arr = []
         for (let i = 0; i < limit; i++) {
-            arr.push("pika.png")
+            if (j >= props.images.length)
+                break;
+            arr.push(props.images[j])
+            j++;
         }
         setImages(arr)
+        props.saveNumPages(Math.ceil(props.images.length / limit))
     }, [props])
 
     
@@ -28,7 +32,7 @@ const ImageGallery = (props) => {
                 <Grid container spacing={0} columns={props.cols}>
                     {images.map((image) => 
                         <Grid item xs={1}>
-                            <img src={image} width={size} height={size}/>
+                            <img src={`https://8f2d-2402-800-6314-bd02-f49c-706d-7377-bc5b.ngrok.io/myapp/server/LSC_Thumbnail/${image}`} width={size} height={size}/>
                         </Grid>
                     )}
                 </Grid>
