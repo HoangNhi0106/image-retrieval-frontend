@@ -10,7 +10,7 @@ const Navbar = (props) => {
         <div className="navbar">
             <div className="navbar-left">
                 <img src="menu-btn.png" width={32} height={32}/>
-                <div className="app-name">Lifelog Retrieval</div>
+                <div className="app-name">Video Retrieval</div>
             </div>
             <div className="navbar-right">
                 <div className="slider-item">
